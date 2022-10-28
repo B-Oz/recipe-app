@@ -3,6 +3,7 @@
 // import Login from "./pages/Login";
 
 import Navbar from "./components/Navbar";
+import RecipeCard from "./components/RecipeCard";
 import Home from "./pages/Home";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       {/* <Login /> */}
       <Home />
+      <RecipeCard />
     </div>
   );
 }
