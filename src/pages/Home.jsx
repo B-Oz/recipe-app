@@ -7,21 +7,21 @@ import RecipeCard from "../components/RecipeCard";
 const Home = () => {
   const [query, setQuery] = useState(null);
   const [meal, setMeal] = useState(null);
+  const [data, setData] = useState(null);
 
-  // const apps = {
-  //   apiKey: process.env.REACT_APP_apiKey,
-  //   appId: process.env.REACT_APP_appId,
-  // };
+  const APP_KEY = process.env.REACT_APP_APP_KEY;
+  const APP_ID = process.env.REACT_APP_APP_ID;
 
-  const apiKey = "0699238fab1128c9744015546a02b835";
-  const appId = "ef5430ac";
+  const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${meal}`;
 
-  const url = `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${apiKey}&mealType=${meal}`;
+  // const apiKey = "0699238fab1128c9744015546a02b835";
+  // const appId = "ef5430ac";
 
   const getApi = () => {
     axios(url)
       .then((res) => {
         console.log(res);
+        setData(res.data.hits);
       })
       .catch((err) => console.log(err));
   };
@@ -34,41 +34,41 @@ const Home = () => {
     <>
       <Navbar />
       <div className="container ">
-        <form action="post" className="homeForm ">
-          <div className="d-flex mt-4 g-2">
-            <input
-              type="search"
-              className="homeInput form-control"
-              name="foodSearch"
-              id="foodSearch"
-              placeholder="What you want eat?"
-              required
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <select
-              className="form-select mx-3"
-              aria-label="Default select example"
-              name="mealtype"
-              id={meal} /*string meal de olabilir */
-              // onSelect={meal}
-              onChange={(e) => setMeal(e.target.value)}
-            >
-              <option value="breakfast">Breakfast</option>
-              <option value="dinner">Dinner</option>
-              <option value="lunch">Lunch</option>
-              <option value="snack">Snack</option>
-              <option value="teatime">Teatime</option>
-            </select>
-            <button
-              className="btn btn-secondary "
-              type="submit"
-              onClick={() => getApi()}
-            >
-              Search
-            </button>
-          </div>
-        </form>
-        <RecipeCard />
+        <div className="d-flex mt-4 g-2">
+          <input
+            type="search"
+            className="homeInput form-control"
+            name="foodSearch"
+            id="foodSearch"
+            placeholder="What you want eat?"
+            required
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <select
+            className="form-select mx-3"
+            aria-label="Default select example"
+            name="mealtype"
+            id={meal} /*string meal de olabilir */
+            // onSelect={meal}
+            onChange={(e) => setMeal(e.target.value)}
+          >
+            <option value="breakfast">Breakfast</option>
+            <option value="dinner">Dinner</option>
+            <option value="lunch">Lunch</option>
+            <option value="snack">Snack</option>
+            <option value="teatime">Teatime</option>
+          </select>
+        </div>
+        <button
+          className="btn btn-secondary "
+          type="submit"
+          onClick={() => getApi()}
+        >
+          Search
+        </button>
+      </div>
+      <div>
+        {data && data.map((item, idx) => <RecipeCard data={item} key={idx} />)}
       </div>
     </>
   );

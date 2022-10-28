@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import "../css/recipeCard.css";
-const RecipeCard = () => {
+
+import { useNavigate } from "react-router-dom";
+
+const RecipeCard = ({ data }) => {
+  const navigate = useNavigate();
   return (
-    <div className="container d-flex justify-content-center align-items-center p-4 m-4">
+    <div className="container d-flex justify-content-center align-items-center p-4 m-4 flex-col text-center">
       <div className="card" style={{ width: "18rem" }}>
-        <img src="..." className="card-img-top" alt="..." />
+        <img src={data.recipe.image} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
+          <h5 className="card-title">{data.recipe.label}</h5>
           <p className="card-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>
-          <Link to="#" className="btn btn-secondary">
+          <button
+            onClick={() => navigate("/details", { state: data.recipe })}
+            className="btn btn-secondary"
+          >
             Details
-          </Link>
+          </button>
         </div>
       </div>
     </div>
