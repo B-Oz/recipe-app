@@ -14,9 +14,6 @@ const Home = () => {
 
   const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&mealType=${meal}`;
 
-  // const apiKey = "0699238fab1128c9744015546a02b835";
-  // const appId = "ef5430ac";
-
   const getApi = () => {
     axios(url)
       .then((res) => {
