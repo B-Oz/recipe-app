@@ -12,11 +12,11 @@ const Login = () => {
       ...user,
       [e.taget.email]: e.target.value,
     });
-    sessionStorage.setItem("user", JSON.stringify(user));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    sessionStorage.setItem("user", JSON.stringify(user));
     navigate("/home", { userName: user.email });
   };
   return (
