@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import { useLocation, useNavigate } from "react-router-dom";
+import "../css/details.css";
 
 const Details = () => {
   const { state: detail } = useLocation();
