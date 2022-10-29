@@ -5,7 +5,8 @@ import "../css/details.css";
 const Details = () => {
   const { state: detail } = useLocation();
   console.log(detail);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // geri dön tuşu ekjleyebilirsin
   return (
     <div>
       <Navbar />
